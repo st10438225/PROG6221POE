@@ -1,0 +1,118 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Media;
+using System.Threading.Tasks;
+using System.Speech.Synthesis;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace task
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            var mySound = new System.Media.SoundPlayer();
+            mySound.SoundLocation = @"c:\sounds\intro.wav";
+            mySound.PlaySync();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            new Logo1() { };
+            Console.ForegroundColor = ConsoleColor.Red;
+            SpeechSynthesizer voce = new SpeechSynthesizer();
+            voce.Volume = 100;
+            voce.Rate = 1;
+            Print("Welccome to central security ");
+            voce.Speak("hello, i am your AI assistant stephen, i will be assisting you today");
+            Print("Please enter your name below");
+            String name = Console.ReadLine();
+            while (name =="" | name == " ")
+            {
+                Print("No input entered");
+                voce.Speak("No need to be a Stranger");
+                Print("Please enter your name below");
+                name = Console.ReadLine();
+            }
+            //voce.Speak("welcome " + name + ", how can i assist you");
+            Print("welcome " + name + ", what would you like to know about.");
+            
+                
+
+
+            Random random = new Random();
+            bool replay = true;
+            String player, computer, playAgain;
+            while (replay)
+            {
+                player = "";
+                computer = "";
+                playAgain = "";
+                while (player != "1" && player != "2" && player != "3")
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("************************");
+                    Print("** 1) Password safety **");
+                    Print("** 2) Phishing        **");
+                    Print("** 3) Safe browsing   **");
+                    Console.WriteLine("************************");
+                    Console.WriteLine("Enter the number below");
+                    ConsoleKeyInfo menuOptions;
+                    menuOptions = Console.ReadKey(true);
+                    voce.Speak("");
+                    switch (menuOptions.KeyChar) 
+                    {
+                        case '1':
+                            Console.ForegroundColor = ConsoleColor.White;
+                            voce.Speak("our services are currentky down, here is some information that can be usefull");
+                            Print("Password security involves creating strong, unique, and difficult to guess passwords, and taking measures to protect them\nAim for passwords that are at least 12 or more characters long, combining uppercase,lowercase letters mixed with numbers and symbols.");
+                           // Console.ReadKey();
+                            break;
+
+                        case '2':
+                            Console.ForegroundColor = ConsoleColor.White;
+                            voce.Speak("our services are currentky down, here is some information that can be usefull");
+                            Print("Phishing is a form of social engineering where attackers manipulate victims into divulging sensitive information or installing malware\nAttackers often impersonate trusted sources like banks, online retailers, or government agencies in their phishing attempts\nhere are some usefull tips:");
+                            Print("1. Be wary of suspicious emails or messages\n2. Use strong passwords and enable multi-factor authentication\n3. Be cautious about sharing personal information online");
+                            break;
+                        case '3':
+                            Console.ForegroundColor = ConsoleColor.White;
+                            voce.Speak("our services are currentky down, here is some information that can be usefull");
+                            Print("Safe Browsing is a Google service that lets client applications check URLs against Google's constantly updated lists of unsafe web resources\nHere are some usefull tips for Safe Browsing");
+                            Print("1. Regularly update your web browser\n2. Strong Passwords and Authentication\n3. Be Mindful of HTTPS and Downloads");
+                            break;
+                        case ' ':
+                            Print("Enter a valid option");
+                            break;
+                    }
+                    break;
+                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                voce.Speak("Do you still want help.");
+            Console.WriteLine("Y/N");
+            playAgain = Console.ReadLine();
+            playAgain = playAgain.ToUpper();
+            if (playAgain == "Y")
+            {
+                replay = true;
+            }
+            else
+            {
+                replay = false;
+            }
+            }
+           Print("GOODBYE");
+            voce.Speak("Thank you, and i hope i was usefull");
+            
+        }
+        public static void Print(string text, int speed = 90) 
+        {
+            foreach (char c in text) 
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(speed);
+            }
+            Console.WriteLine();
+        }
+    }
+}
